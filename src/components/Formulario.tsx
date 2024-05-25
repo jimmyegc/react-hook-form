@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { edadValidator } from "./validators";
+import { useEffect } from "react";
 
 export const Formulario = () => {
   const {
@@ -7,10 +8,12 @@ export const Formulario = () => {
     formState: { errors },
     watch,
     handleSubmit,
+    setValue
   } = useForm({
     defaultValues: {
       nombre: "Luis",
       direccion: "Calle Gran Vía",
+      pais: ""
     },
   });
 
@@ -19,6 +22,11 @@ export const Formulario = () => {
   };
 
   const incluirTelefono = watch("incluirTelefono");
+
+  useEffect(() => {
+    console.log('done')
+    setValue("pais", "fr")
+  }, [])
 
   return (
     <div>
@@ -92,6 +100,10 @@ export const Formulario = () => {
         )}
         <input type="submit" value="Enviar" />
       </form>
+
+      <button onClick={() => setValue("pais", "es")}>España</button>
+      <button onClick={() => setValue("pais", "it")}>Italia</button>
+      <button onClick={() => setValue("pais", "fr")}>Francia</button>
     </div>
   );
 };
