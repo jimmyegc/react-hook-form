@@ -28,9 +28,13 @@ export const Formulario = () => {
     setValue("pais", "fr")
   }, [])
 
+  useEffect(() => {
+    if (incluirTelefono) setValue('telefono', "00000")
+  }, [incluirTelefono])
+
   return (
-    <div>
-      <h2>Formulario</h2>
+    <div className="bg-slate-200 border-2 border-solid border-sky-500">
+      <h4>Formulario</h4>
       <p>Nombre: {watch("nombre")}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -91,6 +95,7 @@ export const Formulario = () => {
         <div>
           <label>¿Incluir teléfono?</label>
           <input type="checkbox" {...register("incluirTelefono")} />
+          incluirTelefono: {JSON.stringify(incluirTelefono)}
         </div>
         {incluirTelefono && (
           <div>
