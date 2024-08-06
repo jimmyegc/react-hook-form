@@ -19,7 +19,26 @@ export const Formulario = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    const fieldArray = generateFieldArray(data);
+    console.log(fieldArray);
   };
+
+  const generateFieldArray = (inputObject) => {
+    const resultArray = [];
+
+    for (const [key, value] of Object.entries(inputObject)) {
+      // Solo incluir propiedades que no estén vacías o que no sean falsas
+      if (value !== "" && value !== false) {
+        resultArray.push({
+          fieldName: key,
+          value: value
+        });
+      }
+    }
+
+    return resultArray;
+  }
+
 
   const incluirTelefono = watch("incluirTelefono");
 

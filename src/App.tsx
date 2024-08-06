@@ -7,8 +7,8 @@ function App() {
   return (
     <>
       <Formulario />
-      <FormWatch />
-      <FormUser />
+      {/* <FormWatch />
+      <FormUser /> */}
     </>
   );
 }
