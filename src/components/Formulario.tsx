@@ -96,8 +96,9 @@ export const Formulario = () => {
         <div>
           <label>Edad</label>
           <input
-            type="text"
+            type="date"
             {...register("edad", {
+              required: true,
               validate: edadValidator,
             })}
           />
