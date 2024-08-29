@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { edadValidator } from "./validators";
-import { useEffect } from "react";
+import { edadValidator, calcularEdad } from "./validators";
+import { useEffect, useState } from "react";
 
 export const Formulario = () => {
   const {
@@ -8,7 +8,8 @@ export const Formulario = () => {
     formState: { errors },
     watch,
     handleSubmit,
-    setValue
+    setValue,
+    getValue
   } = useForm({
     defaultValues: {
       nombre: "Luis",
@@ -16,6 +17,8 @@ export const Formulario = () => {
       pais: ""
     },
   });
+
+  const [age,setAge] = useState()
 
   const onSubmit = (data) => {
     console.log(data);
@@ -43,13 +46,15 @@ export const Formulario = () => {
   const incluirTelefono = watch("incluirTelefono");
 
   useEffect(() => {
-    console.log('done')
+    //console.log('done')
     setValue("pais", "fr")
   }, [])
 
   useEffect(() => {
     if (incluirTelefono) setValue('telefono', "00000")
   }, [incluirTelefono])
+
+  console.log(errors)
 
   return (
     <div className="bg-slate-200 border-2 border-solid border-sky-500">
@@ -97,12 +102,14 @@ export const Formulario = () => {
           <label>Edad</label>
           <input
             type="date"
+            value={age}
+            onChange={(e)=> setAge(e.target.value)}
             {...register("edad", {
               required: true,
               validate: edadValidator,
             })}
           />
-          {errors.edad && <p>La edad debe estar entre 18 y 65</p>}
+          {errors.edad?.type && <p>La edad debe estar entre 18 y 65</p>}
         </div>
         <div>
           <label>País</label>

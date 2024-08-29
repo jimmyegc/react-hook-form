@@ -28,4 +28,4 @@ const edadValidator = (value) => {
   return edad >= 18 && edad <= 65;
 };
 
-export { edadValidator };
+export { edadValidator, calcularEdad };
