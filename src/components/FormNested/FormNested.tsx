@@ -1,6 +1,7 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import type { UseFormRegister, Control, DefaultValues } from "react-hook-form";
 import "./styles.css";
+import { useRef } from "react";
 
 type Answer = {
   value: string;
@@ -71,14 +72,22 @@ const defaultValues: DefaultValues<FormValues> = {
 };
 
 export default function FormNested() {
+  const dragQuestion = useRef<number>(0)
+  const draggedOverQuestion = useRef<number>(0)
+
+
   const { control, handleSubmit, register } = useForm<FormValues>({
     defaultValues
   });
 
-  const { fields, append, remove } = useFieldArray({ control, name: "fields" });
+  const { fields, append, remove, move } = useFieldArray({ control, name: "fields" });
 
   const onSubmit = (data: FormValues) => {
     console.log(data)
+  }
+  
+  const handleSortQuestion =() => {
+
   }
 
 
@@ -99,7 +108,13 @@ export default function FormNested() {
           +Pregunta
         </button>
         {fields.map((field, index) => (
-          <fieldset key={field.id}>
+          <fieldset key={field.id} 
+            draggable 
+            onDragStart={() => (dragQuestion.current = index)}
+            onDragEnter={() => (draggedOverQuestion.current = index)}
+            onDragEnd={() => move(dragQuestion.current, draggedOverQuestion.current)}
+            onDragOver={(e)=> e.preventDefault()}
+            style={{ border: '1px solid #000', padding: 10}}>
             <legend>Pregunta #{index+1}</legend>
             <input type="text" placeholder="¿Pregunta?"
               {...register(`fields.${index}.question`)}
