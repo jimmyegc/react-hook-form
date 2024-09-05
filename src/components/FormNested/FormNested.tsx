@@ -77,8 +77,8 @@ export default function FormNested() {
 
   const { fields, append, remove } = useFieldArray({ control, name: "fields" });
 
-  const onSubmit = (values) => {
-    console.log(values)
+  const onSubmit = (data: FormValues) => {
+    console.log(data)
   }
 
 
