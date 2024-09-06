@@ -27,7 +27,11 @@ function NestedFieldArray({
   register,
   parentFieldIndex
 }: NestedFieldArrayProps) {
-  const { fields, append, remove } = useFieldArray({
+
+  const dragAnswer = useRef<number>(0)
+  const draggedOverAnswer = useRef<number>(0)
+
+  const { fields, append, remove, move } = useFieldArray({
     control,
     name: `fields.${parentFieldIndex}.answers`
   });
@@ -35,18 +39,6 @@ function NestedFieldArray({
   return (
     <fieldset>
       <legend>Respuestas</legend>      
-      {fields.map((field, index) => (
-        <fieldset key={field.id}>
-          <legend>Respuesta #{index+1}</legend>
-          <label>Value:</label>
-          <input
-            {...register(`fields.${parentFieldIndex}.answers.${index}.value`)}
-          />
-          <button type="button" onClick={() => remove(index)}>
-            Remove (<i>Respuesta</i>)
-          </button>
-        </fieldset>
-      ))}
       <button
         type="button"
         style={{ border: '1px solid blue'}}
@@ -58,6 +50,27 @@ function NestedFieldArray({
       >
         +(<i>Respuesta</i>)
       </button>
+      {fields.map((field, index) => (
+        <fieldset key={field.id}        
+        draggable 
+        onDragStart={() => (dragAnswer.current = index)}
+        onDragEnter={() => (draggedOverAnswer.current = index)}
+        onDragEnd={() => move(dragAnswer.current, draggedOverAnswer.current)}
+        onDragOver={(e)=> e.preventDefault()}
+        /* className={`${dragAnswer.current === index ? 'dragging' : ''}`} */
+        style={{ border: '1px solid green'}}
+        >
+          <legend>Respuesta #{index+1}</legend>          
+          <input
+            {...register(`fields.${parentFieldIndex}.answers.${index}.value`)}
+            style={{ border: '1px solid gray', margin: 10}}
+          />
+          <button type="button" onClick={() => remove(index)}>
+            Eliminar (<i>Respuesta</i>)
+          </button>
+        </fieldset>
+      ))}
+     
     </fieldset>
   );
 }

@@ -1,4 +1,4 @@
-body {
+/*body {
     font-family: sans-serif;
   }
   
@@ -10,4 +10,11 @@ body {
   button {
     margin-top: 0.5rem;
   }
-  
+*/  
+
+.dragging {
+  pointer-events: none;
+  touch-action: none;
+  -ms-touch-action: none;
+  box-shadow: 2px 20px 30px rgba(0, 0, 0, 0.2);
+}
