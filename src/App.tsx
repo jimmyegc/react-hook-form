@@ -1,16 +1,21 @@
 import './App.css'
-import { FormArrayFields } from './components/FormArrayFields';
+import { FormDatepicker } from './components/FormDatepicker/FormDatepicker';
+/*import { FormWithFocus } from './components/FormWithFocus/FormWithFocus';
+ import { FormArrayFields } from './components/FormArrayFields';
 import FormNested from './components/FormNested/FormNested';
 import { Formulario } from "./components/Formulario";
 import { FormUser } from './components/FormUser';
-import { FormWatch } from './components/FormWatch';
+import { FormWatch } from './components/FormWatch'; */
 
 function App() {
   return (
     <>
+    <h2>React Hook Form</h2>
+      <FormDatepicker />
+      {/*<FormWithFocus />
       
       <FormNested/>
-      {/*<FormArrayFields />
+      <FormArrayFields />
       <Formulario />
        <FormWatch />
       <FormUser /> */}
