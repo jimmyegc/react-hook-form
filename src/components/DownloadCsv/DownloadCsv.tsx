@@ -1,12 +1,17 @@
 
-const MockData = [
-  { id: 1, name: "Michael Jordan", age: 23 },
-  { id: 2, name: "Michael Jordan 2", age: 24 },
-]
+interface MockData {
+  id: number 
+  name: string
+  age: number
+}
 
 export const DownloadCsv = () => {
 
-
+  const MockData = [
+    { id: 1, name: "Michael Jordan", age: 23 },
+    { id: 2, name: "Michael Jordan 2", age: 24 },
+  ]
+  
 
   const convertToCSV = (data: any) => {
     let result = ""
@@ -33,7 +38,7 @@ export const DownloadCsv = () => {
 
   }
 
-  const handleDownload = (data: []) => {
+  const handleDownload = (data: MockData[]) => {
     const link= document.createElement("a")
     let csv = convertToCSV(data)
     if(csv == null)  return
