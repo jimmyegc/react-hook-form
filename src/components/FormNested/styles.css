@@ -1,0 +1,21 @@
+/*body {
+    font-family: sans-serif;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  button {
+    margin-top: 0.5rem;
+  }
+*/  
+
+.dragging {
+  pointer-events: none;
+  touch-action: none;
+  -ms-touch-action: none;
+  box-shadow: 2px 20px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+}
