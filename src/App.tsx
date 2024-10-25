@@ -1,13 +1,13 @@
 import './App.css'
-import { FormUser } from './components/FormUser';
+import { Formulario } from "./components/Formulario";
 
 function App() {
   return (
-    
-      <div>      
-      {/* <FormWatch /> */}
-      <FormUser />
-      </div>    
+    <>
+      <Formulario />
+      {/* <FormWatch />
+      <FormUser /> */}
+    </>
   );
 }
 
